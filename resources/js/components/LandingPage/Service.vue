@@ -17,6 +17,8 @@
                     :serviceDescription="data.description"
                     :serviceProviderImg="data.provider_image"
                     :serviceProvider="data.provider_name"
+                    :countryName="data.country_name"
+                    :cityName="data.city_name"
                     :serviceType="data.type"
                     :categoryName="data.category_name"
                     :subcategoryName="data.subcategory_name"

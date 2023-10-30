@@ -35,6 +35,8 @@ class ServiceResource extends JsonResource
             'provider_name' => optional($this->providers)->display_name,
             'provider_image' => optional($this->providers)->login_type != null ?  optional($this->providers)->social_image : getSingleMedia(optional($this->providers), 'profile_image',null),
             'city_id' => optional($this->providers)->city_id,
+            'country_name' => optional($this->providers->country)->name,
+            'city_name' => optional($this->providers->city)->name,
             'category_name'  => optional($this->category)->name,
             'subcategory_name'  => optional($this->subcategory)->name,
             'attchments' => getAttachments($this->getMedia('service_attachment')),

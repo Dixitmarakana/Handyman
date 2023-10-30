@@ -50,7 +50,11 @@ class DashboardController extends Controller
         $category = CategoryResource::collection(Category::where('status',1)->where('is_featured',1)->orderBy('name','asc')->paginate(8));
         
         $service = Service::where('status',1)->where('service_type','service');
-        
+
+        $service->with(['providers' => function ($query) {
+            $query->with('country');
+        }]);
+
         if ($request->has('city_id') && !empty($request->city_id)) {
             $service->whereHas('providers', function ($a) use ($request) {
                 $a->where('city_id', $request->city_id);
@@ -66,7 +70,15 @@ class DashboardController extends Controller
             });
         }
         $service = $service->orderBy('id','desc')->paginate($per_page);
-        
+
+        $service = $service->map(function ($item) {
+        // Assuming that 'providers' is the relationship for the user in the Service model
+            $item->providers->each(function ($provider) {
+                $provider->country_name = optional($provider->country)->name;
+            });
+            return $item;
+        });
+
         $service = ServiceResource::collection($service);
         if(default_earning_type() === 'subscription'){
             $provider = User::where('user_type','provider')->where('status',1)->where('is_subscribe',1);

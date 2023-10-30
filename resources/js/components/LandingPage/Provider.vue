@@ -21,6 +21,9 @@
                                 <h5>{{data.display_name}}</h5>
                             </router-link>
                             <span class="provider-desc">{{data.providertype}}</span>
+                            <div class="location-info">
+                                <span class="ms-2">{{ displayLocation(data) }}</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -36,6 +39,14 @@ export default {
       return {
           baseUrl:window.baseUrl
       }
+    },
+    methods: {
+        displayLocation(data) {
+            if (data.city_name && data.country_name) {
+                return data.city_name + ' - ' + data.country_name;
+            }
+            return '';
+        },
     },
     computed: {
         ...mapGetters(["provider"]),

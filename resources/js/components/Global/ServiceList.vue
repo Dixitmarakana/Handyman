@@ -28,6 +28,9 @@
                     <img :src="serviceProviderImg" alt="image" class="img-fluid avatar avatar-35 avatar-rounded"/>
                     <span class="ms-2">{{ serviceProvider }}</span>
                 </div>
+                <div class="location-info">
+                    <span class="ms-2">{{ displayLocation }}</span>
+                </div>
             </div>
         </div>
     </div>
@@ -46,10 +49,20 @@ export default {
         serviceRating: { type: Number },
         serviceDescription: { type: String },
         serviceProviderImg: { type: String },
+        countryName: { type: String },
+        cityName: { type: String },
         serviceProvider: { type: String },
         serviceType:{type:String},
         categoryName:{type:String},
         subcategoryName:{type:String},
+    },
+    computed: {
+        displayLocation() {
+            if (this.cityName && this.countryName) {
+                return this.cityName + ' - ' + this.countryName;
+            }
+            return '';
+        }
     },
     methods:{
         scrolltitle(title){
