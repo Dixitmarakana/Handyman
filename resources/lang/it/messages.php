@@ -573,5 +573,10 @@ return [
   'services' => 'Servizi',
   'cash_payment' => 'Pagamento in contanti',
   'history' => 'Storia',
-  'assign_service'=>"Assegna Servizio al Provider"
+  'assign_service'=>"Assegna Servizio al Provider",
+  'history' => 'Competenze',
+  'description' => 'Descrizione',
+  'languages' => 'Le lingue',
+  'jobs' => 'Lavori'
+
 ];

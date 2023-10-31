@@ -40,7 +40,14 @@
                         {{ Form::text('username',old('username'),['placeholder' => __('messages.username'),'class' =>'form-control','required']) }}
                         <small class="help-block with-errors text-danger"></small>
                     </div>
-
+                    
+                    @if(auth()->user()->hasRole('provider'))
+                    <div class="form-group col-md-6">
+                        {{ Form::label('designation',__('messages.designation').' <span class="text-danger">*</span>',['class'=>'form-control-label'], false ) }}
+                        {{ Form::text('designation',old('designation'),['placeholder' => __('messages.designation'),'class' =>'form-control','required']) }}
+                        <small class="help-block with-errors text-danger"></small>
+                    </div>
+                    
                     <div class="form-group col-md-6">
                         {{ Form::label('company',__('messages.company').' <span class="text-danger">*</span>',['class'=>'form-control-label'], false ) }}
                         {{ Form::text('company',old('company'),['placeholder' => __('messages.company'),'class' =>'form-control','required']) }}
@@ -52,14 +59,8 @@
                         {{ Form::text('vat_number',old('vat_number'),['placeholder' => __('messages.vat_number'),'class' =>'form-control','required']) }}
                         <small class="help-block with-errors text-danger"></small>
                     </div>
-
-                    @if(auth()->user()->hasRole('provider'))
-                    <div class="form-group col-md-6">
-                        {{ Form::label('designation',__('messages.designation').' <span class="text-danger">*</span>',['class'=>'form-control-label'], false ) }}
-                        {{ Form::text('designation',old('designation'),['placeholder' => __('messages.designation'),'class' =>'form-control','required']) }}
-                        <small class="help-block with-errors text-danger"></small>
-                    </div>
                     @endif
+                    
                     <div class="form-group col-md-6">
                         {{ Form::label('country_id', __('messages.select_name',[ 'select' => __('messages.country') ]),['class'=>'form-control-label'],false) }}
                         <br />

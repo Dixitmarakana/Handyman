@@ -175,6 +175,7 @@
         'booking_detail'=>'Booking Details',
         'by'=>'By',
         'duration'=>'Duration',
+        'skills'=>'Skills',
         'book_at'=> 'Booked at',
         'start_at'=> 'Start at',
         'end_at'=> 'End at',
@@ -653,9 +654,10 @@
         'debit'=>'Debit',
         'providerpayout_list' => 'Provider Payout',
         'messages' => 'Messages',
-        'filter_by_country' => 'Filter By Country'
-    
-
+        'filter_by_country' => 'Filter By Country',
+        'description' => 'Description',
+        'languages' => 'languages',
+        'jobs' => 'Jobs'
 
           
     )

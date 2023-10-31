@@ -39,6 +39,15 @@
                                 </span>
                             </li>
                         </ul>
+
+                        <ul class="list-inline d-flex flex-wrap align-items-center mb-0">
+                            <li class="d-flex align-items-center flex-wrap gap-2">
+                                    <div class="d-block d-sm-flex align-items-center text-primary">                               
+                                        <span>Location : {{provider.city_name}} - {{provider.country_name}}</span>
+                                    </div>                                            
+                            </li>
+                        </ul>
+
                         <div class="book-now-btn">
                             <button class="btn btn-primary"><router-link class="text-white" :to="{name: 'book-service',params: { service_id: serviceData.id}}">{{__('messages.book_now')}}</router-link></button>
                         </div>
@@ -125,6 +134,8 @@
                                                 :serviceDescription="data.description"
                                                 :serviceProviderImg="data.provider_image"
                                                 :serviceProvider="data.provider_name"
+                                                :countryName="data.country_name"
+                                                :cityName="data.city_name"
                                                 :serviceType="data.type"
                                                 :categoryName="data.category_name"
                                                 :subcategoryName="data.subcategory_name"
@@ -173,6 +184,12 @@
                                                     <rating :readonly = true :showrating ="false" :ratingvalue="provider.providers_service_rating" />
                                                 </div>
                                             </div>
+
+                                            <div class="location-info"> 
+                                                <div class="d-flex align-items-center">                               
+                                                    <span>{{provider.city_name}} - {{provider.country_name}}</span>
+                                                </div>
+                                            </div>
                                             
                                             <a v-bind:href="'mailto:'+provider.email" class="btn btn-primary mt-4">{{__('messages.contact')}}</a>
                                         </div>
@@ -191,6 +208,39 @@
                             </div>                            
                         </div>
                         
+                        <div class="card" v-if="provider.skills">
+                            <div class="card-body">
+                                <div class="sidebar-title">
+                                    <h5 class="title">{{__('messages.skills')}}</h5>
+                                </div>
+                                <div class="skills-details">
+                                    <span>{{ provider.skills }}</span>
+                                </div>
+                            </div>                            
+                        </div>
+
+                        <div class="card" v-if="provider.known_languages">
+                            <div class="card-body">
+                                <div class="sidebar-title">
+                                    <h5 class="title">{{__('messages.languages')}}</h5>
+                                </div>
+                                <div class="languages-details">
+                                    <span>{{ provider.known_languages }}</span>
+                                </div>
+                            </div>                            
+                        </div>
+
+                        <div class="card" v-if="provider.description">
+                            <div class="card-body">
+                                <div class="sidebar-title">
+                                    <h5 class="title">{{__('messages.description')}}</h5>
+                                </div>
+                                <div class="description-details">
+                                    <span>{{ provider.description }}</span>
+                                </div>
+                            </div>                            
+                        </div>
+
                     </div>   
                 </div> 
             </div>

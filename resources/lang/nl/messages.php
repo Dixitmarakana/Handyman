@@ -632,6 +632,10 @@ return [
         'cash_payment' => 'Contante Betaling',
         'history' => 'Geschiedenis',
         'assign_service'=>"Toewijzen van dienst aan provider",
-        'paypal_client_id' => 'Paypal Client Id'
+        'paypal_client_id' => 'Paypal Client Id',
+        'skills' => 'Vaardigheden',
+        'description' => 'Beschrijving',
+        'languages' => 'Talen',
+        'jobs' => 'Banen'
       
 ];

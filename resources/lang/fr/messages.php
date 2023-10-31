@@ -576,5 +576,9 @@ return [
   'assign_service'=>"Assigner un service au fournisseur",
   'razorpay_message' => ':razorpay_message!',
   'queue_message'=>'Your request is in the queue due to an insufficient balance',
+  'skills' => 'Compétences',
+  'description' => 'Description',
+  'languages' => 'Langues',
+  'jobs' => 'Emplois'
 
 ];
