@@ -577,6 +577,7 @@ return [
   'history' => 'Competenze',
   'description' => 'Descrizione',
   'languages' => 'Le lingue',
-  'jobs' => 'Lavori'
+  'jobs' => 'Lavori',
+  'sticker-setting' => "Impostazione dell'autoadesivo"
 
 ];

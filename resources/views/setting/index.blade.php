@@ -54,6 +54,9 @@
                                             <li class="nav-item">
                                                 <a href="javascript:void(0)" data-href="{{ route('layout_page') }}?page=user-wallet-setting" data-target=".paste_here" class="nav-link {{$page=='user-wallet-setting'?'active':''}}"  data-toggle="tabajax" rel="tooltip"> {{ __('messages.user_wallet_setting') }}</a>
                                             </li>
+                                            <li class="nav-item">
+                                                <a href="javascript:void(0)" data-href="{{ route('layout_page') }}?page=sticker-setting" data-target=".paste_here" class="nav-link {{$page=='sticker-setting'?'active':''}}"  data-toggle="tabajax" rel="tooltip"> {{ __('messages.sticker-setting') }}</a>
+                                            </li>
                                         @endhasanyrole
                                     @endif
                                 </ul>

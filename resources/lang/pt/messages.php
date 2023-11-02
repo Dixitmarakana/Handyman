@@ -577,6 +577,6 @@ return [
   'skills' => 'Habilidades',
   'description' => 'Descrição',
   'languages' => 'línguas',
-  'jobs' => 'Empregos'
+  'jobs' => 'Configuração de adesivo'
 
 ];

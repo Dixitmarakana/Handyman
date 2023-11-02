@@ -208,7 +208,7 @@
                             </div>                            
                         </div>
                         
-                        <div class="card" v-if="provider.skills">
+                        <div class="card">
                             <div class="card-body">
                                 <div class="sidebar-title">
                                     <h5 class="title">{{__('messages.skills')}}</h5>
@@ -219,7 +219,7 @@
                             </div>                            
                         </div>
 
-                        <div class="card" v-if="provider.known_languages">
+                        <div class="card">
                             <div class="card-body">
                                 <div class="sidebar-title">
                                     <h5 class="title">{{__('messages.languages')}}</h5>
@@ -230,7 +230,7 @@
                             </div>                            
                         </div>
 
-                        <div class="card" v-if="provider.description">
+                        <div class="card">
                             <div class="card-body">
                                 <div class="sidebar-title">
                                     <h5 class="title">{{__('messages.description')}}</h5>

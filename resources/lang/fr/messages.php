@@ -579,6 +579,7 @@ return [
   'skills' => 'Compétences',
   'description' => 'Description',
   'languages' => 'Langues',
-  'jobs' => 'Emplois'
+  'jobs' => 'Emplois',
+  'sticker-setting' => 'Réglage des autocollants'
 
 ];

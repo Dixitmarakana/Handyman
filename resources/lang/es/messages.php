@@ -522,6 +522,7 @@ return [
   'skills'=>'Habilidades',
   'description' => 'Descrição',
   'languages' => 'línguas',
-  'jobs' => 'Empregos'
+  'jobs' => 'Empregos',
+  'sticker-setting' => 'Configuração de adesivo'
 
 ];

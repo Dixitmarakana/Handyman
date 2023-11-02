@@ -657,8 +657,8 @@
         'filter_by_country' => 'Filter By Country',
         'description' => 'Description',
         'languages' => 'languages',
-        'jobs' => 'Jobs'
-
+        'jobs' => 'Jobs',
+        'sticker-setting' => 'Sticker Setting'
           
     )
     ?>

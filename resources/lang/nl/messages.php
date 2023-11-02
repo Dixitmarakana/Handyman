@@ -636,6 +636,7 @@ return [
         'skills' => 'Vaardigheden',
         'description' => 'Beschrijving',
         'languages' => 'Talen',
-        'jobs' => 'Banen'
+        'jobs' => 'Banen',
+        'sticker-setting' => 'Sticker-instelling'
       
 ];
