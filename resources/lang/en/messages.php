@@ -658,7 +658,11 @@
         'description' => 'Description',
         'languages' => 'languages',
         'jobs' => 'Jobs',
-        'sticker-setting' => 'Sticker Setting'
+        'sticker-setting' => 'Sticker Setting',
+        'sticker_type' => 'Sticker Type',
+        'sticker_type_placeholder' => 'Sticker Type',
+        'sticker' => 'Sticker',
+        'sticker_placeholder' => 'Sticker',
           
     )
     ?>

@@ -637,6 +637,11 @@ return [
         'description' => 'Beschrijving',
         'languages' => 'Talen',
         'jobs' => 'Banen',
-        'sticker-setting' => 'Sticker-instelling'
+        'sticker-setting' => 'Sticker-instelling',
+        'sticker_type' => "Stickertype",
+        'sticker_type_placeholder' => "Stickertype",
+        'sticker' => "Sticker",
+        'sticker_placeholder' => "Sticker",
+
       
 ];

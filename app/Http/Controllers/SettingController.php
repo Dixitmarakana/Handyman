@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Country;
 use App\Models\Menus;
 use App\Models\Service;
+use App\Models\Sticker;
 use Session;
 use Config;
 use Hash;
@@ -104,6 +105,10 @@ class SettingController extends Controller
                 $wallet = Setting::where('type', '=', 'USER_WALLET_SETTING')->first();
                 $data = view('setting.' . $page, compact('settings', 'page', 'wallet'))->render();
                 break;
+            case 'sticker-setting':
+                $wallet = Setting::where('type', '=', 'USER_WALLET_SETTING')->first();
+                $data = view('setting.' . $page, compact('settings', 'page', 'wallet'))->render();
+                break;
             default:
                 $data  = view('setting.' . $page, compact('settings', 'page', 'envSettting'))->render();
                 break;
@@ -174,6 +179,39 @@ class SettingController extends Controller
 
 
         return redirect()->route('setting.index', ['page' => $page])->withSuccess(__('messages.updated'));
+    }
+
+    public function stickerSave(Request $request)
+    {
+        // dd($request->all());
+        if (demoUserPermission()) {
+            return redirect()->back()->withErrors(trans('messages.demo_permission_denied'));
+        }
+
+        $request->validate([
+            'sticker' => 'required|image',
+            'sticker_type' => 'required|unique:stickers,sticker_type'
+        ]);
+
+        $sticker = new Sticker();
+        $sticker->sticker_type = $request->sticker_type;
+        $timestamp = strtotime('now');
+        $randomNumber = mt_rand(1000, 9999);
+        $imageName = $timestamp . $randomNumber . '.' . $request->file('sticker')->getClientOriginalExtension();
+
+        $sticker->sticker = $imageName;
+        $sticker->save();
+
+        // Store media file
+        $request->file('sticker')->move(public_path('images/sticker'), $imageName);
+
+        // Store media file
+        storeMediaFile($sticker, $request->file('sticker'), 'sticker');
+    
+    
+        // Add any other logic or validations you might need
+
+        return redirect()->route('setting.index')->withSuccess(__('messages.sticker_saved'));
     }
 
     public function envChanges(Request $request)

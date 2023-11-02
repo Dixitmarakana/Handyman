@@ -204,12 +204,12 @@ Route::group(['middleware' => ['auth', 'verified']], function()
     // Setting
     Route::get('setting/{page?}',[ SettingController::class, 'settings'])->name('setting.index');
     Route::post('/layout-page',[ SettingController::class, 'layoutPage'])->name('layout_page');
-    Route::post('/layout-page',[ SettingController::class, 'layoutPage'])->name('layout_page');
     Route::post('settings/save',[ SettingController::class , 'settingsUpdates'])->name('settingsUpdates');
     Route::post('dashboard-setting',[ SettingController::class , 'dashboardtogglesetting'])->name('togglesetting');
     Route::post('provider-dashboard-setting',[ SettingController::class , 'providerdashboardtogglesetting'])->name('providertogglesetting');
     Route::post('handyman-dashboard-setting',[ SettingController::class , 'handymandashboardtogglesetting'])->name('handymantogglesetting');
     Route::post('config-save',[ SettingController::class , 'configUpdate'])->name('configUpdate');
+    Route::post('sticker-save',[ SettingController::class , 'stickerSave'])->name('stickerSave');
 
     
     Route::post('env-setting', [ SettingController::class , 'envChanges'])->name('envSetting');

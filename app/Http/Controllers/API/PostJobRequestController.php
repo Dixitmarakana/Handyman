@@ -37,7 +37,6 @@ class PostJobRequestController extends Controller
 
         $post_request = $post_request->orderBy('id',$orderBy)->paginate($per_page);
         $items = PostJobRequestResource::collection($post_request);
-
         $response = [
             'pagination' => [
                 'total_items' => $items->total(),

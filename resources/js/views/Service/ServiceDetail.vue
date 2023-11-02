@@ -214,10 +214,14 @@
                                     <h5 class="title">{{__('messages.skills')}}</h5>
                                 </div>
                                 <div class="skills-details">
-                                    <span>{{ provider.skills }}</span>
+                                    <ul>
+                                        <li v-for="(skills, index) in skillList">
+                                                {{ skills }}
+                                        </li> 
+                                    </ul>
                                 </div>
-                            </div>                            
-                        </div>
+                            </div>
+                            </div>
 
                         <div class="card">
                             <div class="card-body">
@@ -225,7 +229,11 @@
                                     <h5 class="title">{{__('messages.languages')}}</h5>
                                 </div>
                                 <div class="languages-details">
-                                    <span>{{ provider.known_languages }}</span>
+                                    <ul>
+                                        <li v-for="(language, index) in languageList">
+                                            {{ language }}
+                                        </li> 
+                                    </ul>
                                 </div>
                             </div>                            
                         </div>
@@ -286,6 +294,7 @@ export default {
             provider:{},
             ratingData:{},
             relatedService:{},
+            skills:{},
             baseUrl:window.baseUrl
         }
     },
@@ -314,12 +323,24 @@ export default {
             .then((response) => {
                 this.serviceData = response.data.service_detail;
                 this.provider = response.data.provider;
-                this.ratingData = response.data.rating_data
-                this.relatedService = response.data.related_service
+                this.ratingData = response.data.rating_data;
+                this.relatedService = response.data.related_service;
+                this.skills = response.data.provider.skills;
+                this.language = response.data.provider.known_languages;
             });
             this.loading = false;
         }
-    }
+    },
+    computed: {
+        languageList() {
+            const languageArry = this.language.match(/\w+/g);
+            return languageArry;
+        },
+        skillList() {
+            const skillsArray = this.skills.match(/\w+/g);
+            return skillsArray;
+        }
+    },
 }
 </script>
 

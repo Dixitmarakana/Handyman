@@ -580,6 +580,10 @@ return [
   'description' => 'Description',
   'languages' => 'Langues',
   'jobs' => 'Emplois',
-  'sticker-setting' => 'Réglage des autocollants'
+  'sticker-setting' => 'Réglage des autocollants',
+  'sticker_type' => "Type d'autocollant",
+  'sticker_type_placeholder' => "Type d'autocollant",
+  'sticker' => "Autocollant",
+  'sticker_placeholder' => "Autocollant",
 
 ];

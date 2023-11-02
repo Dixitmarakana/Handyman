@@ -578,6 +578,10 @@ return [
   'description' => 'Descrizione',
   'languages' => 'Le lingue',
   'jobs' => 'Lavori',
-  'sticker-setting' => "Impostazione dell'autoadesivo"
+  'sticker-setting' => "Impostazione dell'autoadesivo",
+  'sticker_type' => "Tipo di adesivo",
+  'sticker_type_placeholder' => "Tipo di adesivo",
+  'sticker' => "Etichetta",
+  'sticker_placeholder' => "Etichetta",
 
 ];

@@ -523,6 +523,10 @@ return [
   'description' => 'Descrição',
   'languages' => 'línguas',
   'jobs' => 'Empregos',
-  'sticker-setting' => 'Configuração de adesivo'
+  'sticker-setting' => 'Configuração de adesivo',
+  'sticker_type' => 'Tipo de pegatina',
+  'sticker_type_placeholder' => 'Tipo de pegatina',
+  'sticker' => 'Pegatina',
+  'sticker_placeholder' => 'Pegatina'
 
 ];

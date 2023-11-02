@@ -577,6 +577,10 @@ return [
   'skills' => 'Habilidades',
   'description' => 'Descrição',
   'languages' => 'línguas',
-  'jobs' => 'Configuração de adesivo'
+  'jobs' => 'Configuração de adesivo',
+  'sticker_type' => "Tipo de adesivo",
+  'sticker_type_placeholder' => "Tipo de adesivo",
+  'sticker' => "Adesiva",
+  'sticker_placeholder' => "Adesiva",
 
 ];
