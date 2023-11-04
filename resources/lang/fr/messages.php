@@ -585,5 +585,6 @@ return [
   'sticker_type_placeholder' => "Type d'autocollant",
   'sticker' => "Autocollant",
   'sticker_placeholder' => "Autocollant",
+  'filter_by_city' => "Filtrer par ville",
 
 ];

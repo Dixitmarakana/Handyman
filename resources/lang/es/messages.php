@@ -527,6 +527,7 @@ return [
   'sticker_type' => 'Tipo de pegatina',
   'sticker_type_placeholder' => 'Tipo de pegatina',
   'sticker' => 'Pegatina',
-  'sticker_placeholder' => 'Pegatina'
+  'sticker_placeholder' => 'Pegatina',
+  'filter_by_city' => "Filtrar por ciudad",
 
 ];

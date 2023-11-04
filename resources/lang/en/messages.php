@@ -655,6 +655,7 @@
         'providerpayout_list' => 'Provider Payout',
         'messages' => 'Messages',
         'filter_by_country' => 'Filter By Country',
+        'filter_by_city' => 'Filter By City',
         'description' => 'Description',
         'languages' => 'languages',
         'jobs' => 'Jobs',

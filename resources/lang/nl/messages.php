@@ -642,6 +642,7 @@ return [
         'sticker_type_placeholder' => "Stickertype",
         'sticker' => "Sticker",
         'sticker_placeholder' => "Sticker",
+        'filter_by_city' => "Filter op stad",
 
       
 ];

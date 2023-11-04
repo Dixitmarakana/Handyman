@@ -52,15 +52,32 @@
                         <div class="form-group">
                             <label for="countries" class="form-control-label mb-3">{{__('messages.filter_by_country')}}</label>
                             <multi-select
-                                deselect-label=""
-                                select-label=""
-                                @input="handleFilterChange"
-                                tag-placeholder="countries" 
-                                id="countries" 
-                                v-model="filterData.country_id"
-                                label="name" 
-                                track-by="id" 
-                                :options="allcountry"
+                            deselect-label=""
+                            select-label=""
+                            @input="handleFilterChange"
+                            tag-placeholder="countries" 
+                            id="countries" 
+                            v-model="filterData.country_id"
+                            label="name" 
+                            track-by="id" 
+                            :options="allcountry"
+                            ></multi-select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="cities" class="form-control-label mb-3">{{__('messages.filter_by_city')}}</label>
+                            <multi-select
+                            deselect-label=""
+                            select-label=""
+                            @input="handleFilterChange"
+                            tag-placeholder="cities" 
+                            id="cities" 
+                            v-model="filterData.city_id"
+                            label="name" 
+                            track-by="id" 
+                            :options="allcities"
                             ></multi-select>
                         </div>
                     </div>
@@ -167,6 +184,7 @@ export default {
             },
         ],
         allcountry: [],
+        allcities: [],
         }
     },
     computed: {
@@ -180,6 +198,10 @@ export default {
             this.pricesliderinit();
         }, 1000);
     },
+    created() {
+        this.getAllCountries();
+        this.getAllCities();
+    },
     methods:{
         defaultFilterData: function () {
             return {
@@ -190,9 +212,41 @@ export default {
                 is_rating: [],
                 latitude:'',
                 longitude:'',
-                country_id: {} // New addition
+                country_id: {},
+                city_id: {},
             }
         },  
+        getAllCountries() {
+            get("country-list") 
+                .then((response) => {
+                if (response.status === 200) {
+                    this.allcountry = response.data; 
+                } else {
+                    this.allcountry = []; 
+                }
+                })
+                .catch((error) => {
+                console.error("Error fetching country list:", error);
+                });
+        },
+        getAllCities() {
+            console.log("city");
+            console.log(this.filterData.country_id);
+            if (this.filterData.country_id && this.filterData.country_id.id) {
+            get(`city-list?country_id=${this.filterData.country_id.id}`)
+                .then((response) => {
+                    if (response.status === 200) {
+                        this.allcities = response.data;
+                    } else {
+                        this.allcities = [];
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error fetching city list:", error);
+                });
+            }
+
+        },
         getServiceList(filterData=''){
             this.loading = true;
             var params= {
@@ -217,6 +271,7 @@ export default {
                     category_id:filterData.category_id.id,
                     provider_id:filterData.provider_id.id,
                     country_id: filterData.country_id ? filterData.country_id.id : '',
+                    city_id: filterData.city_id ? filterData.city_id.id : '',
                     is_price_min:filterData.is_price_min,
                     is_price_max:filterData.is_price_max,
                     latitude:latitude,
@@ -270,6 +325,7 @@ export default {
             this.filterData.is_price_max= slidercurrentval[1]
             console.log(this.filterData.is_price_min);
             console.log(this.filterData.is_price_max);
+            this.getAllCities();
             let filterData = Object.assign({}, this.filterData);
             this.getServiceList(filterData);
         },

@@ -49,6 +49,16 @@ class CommanController extends Controller
 
         return response()->json( $list );
     }
+
+    public function getCitiesByCountry(Request $request)
+    {
+        $countryId = $request->country_id;
+        $cities = City::whereHas('state', function ($query) use ($countryId) {
+            $query->where('country_id', $countryId);
+        })->get();
+        return response()->json($cities);
+    }
+    
     public function getProviderTax(Request $request){
        
         $provider_id  = !empty($request->provider_id) ? $request->provider_id : auth()->user()->id;

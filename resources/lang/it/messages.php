@@ -583,5 +583,6 @@ return [
   'sticker_type_placeholder' => "Tipo di adesivo",
   'sticker' => "Etichetta",
   'sticker_placeholder' => "Etichetta",
+  'filter_by_city' => "Filtra per città",
 
 ];

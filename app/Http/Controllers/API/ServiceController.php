@@ -53,6 +53,7 @@ class ServiceController extends Controller
         if($request->has('subcategory_id') && $request->subcategory_id != ''){
             $service->whereIn('subcategory_id',explode(',',$request->subcategory_id));
         }
+
         if ($request->has('country_id') && $request->country_id != '') {
             $service->whereHas('providers', function ($a) use ($request) {
                 $a->whereHas('country', function ($b) use ($request) {
@@ -73,9 +74,10 @@ class ServiceController extends Controller
                 return $q;
             });
         }
-        if($request->has('is_price_min') && $request->is_price_min != '' || $request->has('is_price_max') && $request->is_price_max != ''){
+        if($request->has('is_price_min') && $request->is_price_min != '' && $request->is_price_min != 0.00 ||  $request->has('is_price_max') && $request->is_price_max != '' && $request->is_price_max != 0.00){
             $service->whereBetween('price', [$request->is_price_min, $request->is_price_max]); 
         }
+
         if ($request->has('city_id')) {
             $service->whereHas('providers', function ($a) use ($request) {
                 $a->where('city_id', $request->city_id);
@@ -108,7 +110,6 @@ class ServiceController extends Controller
         if($request->has('search')){
             $service->where('name','like',"%{$request->search}%");
         }
-
         $per_page = config('constant.PER_PAGE_LIMIT');
         if( $request->has('per_page') && !empty($request->per_page)){
             if(is_numeric($request->per_page)){
@@ -128,6 +129,7 @@ class ServiceController extends Controller
             $service = $service->where('status',1)->orderBy('created_at','desc');
 
         }
+        // dd($service->get());
 
         $service = $service->paginate($per_page);
      
