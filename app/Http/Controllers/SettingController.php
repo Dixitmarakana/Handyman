@@ -183,36 +183,32 @@ class SettingController extends Controller
 
     public function stickerSave(Request $request)
     {
-        // dd($request->all());
+        $page = $request->page;
         if (demoUserPermission()) {
             return redirect()->back()->withErrors(trans('messages.demo_permission_denied'));
         }
-
+    
         $request->validate([
             'sticker' => 'required|image',
             'sticker_type' => 'required|unique:stickers,sticker_type'
         ]);
-
+    
         $sticker = new Sticker();
         $sticker->sticker_type = $request->sticker_type;
+    
         $timestamp = strtotime('now');
         $randomNumber = mt_rand(1000, 9999);
         $imageName = $timestamp . $randomNumber . '.' . $request->file('sticker')->getClientOriginalExtension();
-
+    
         $sticker->sticker = $imageName;
         $sticker->save();
-
-        // Store media file
+    
         $request->file('sticker')->move(public_path('images/sticker'), $imageName);
-
-        // Store media file
-        storeMediaFile($sticker, $request->file('sticker'), 'sticker');
     
-    
-        // Add any other logic or validations you might need
-
-        return redirect()->route('setting.index')->withSuccess(__('messages.sticker_saved'));
+        return redirect()->route('setting.index', ['page' => $page])->withSuccess(__('messages.updated'));
     }
+    
+
 
     public function envChanges(Request $request)
     {
