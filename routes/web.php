@@ -38,6 +38,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BookingRatingController;
 use App\Http\Controllers\HandymanRatingController;
 use App\Http\Controllers\UserServiceListController;
+use App\Http\Controllers\JobsRequestsController;
 
 
 
@@ -374,6 +375,8 @@ Route::group(['middleware' => ['auth', 'verified']], function()
         Route::post('blog/{id}', [BlogController::class, 'destroy'])->name('blog.destroy');
     });
 
+
+    Route::resource('jobs_requests', JobsRequestsController::class);
 
 });
 Route::get('/ajax-list',[HomeController::class, 'getAjaxList'])->name('ajax-list');

@@ -58,6 +58,7 @@ Route::get('booking-status', [ API\BookingController::class, 'bookingStatus' ] )
 Route::post('handyman-reviews',[API\User\UserController::class, 'handymanReviewsList']);
 Route::post('service-reviews', [ API\ServiceController::class, 'serviceReviewsList' ] );
 Route::get('post-job-status', [ API\PostJobRequestController::class, 'postRequestStatus' ] );
+Route::get('get-job-list',[ API\PostJobRequestController::class, 'getPostRequestList' ]);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('service-save', [ App\Http\Controllers\ServiceController::class, 'store' ] );

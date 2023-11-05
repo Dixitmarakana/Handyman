@@ -18,7 +18,7 @@ class PostJobRequestResource extends JsonResource
     {
         $user = auth()->user();
         $can_bid = null;
-        if($user->hasRole('provider')){
+        if(auth()->user() && $user->hasRole('provider')){
           $can_bid = true;
           $count = count($this->postBidList->where('provider_id',$user->id));
           if($count > 0){

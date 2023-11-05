@@ -664,6 +664,9 @@
         'sticker_type_placeholder' => 'Sticker Type',
         'sticker' => 'Sticker',
         'sticker_placeholder' => 'Sticker',
-          
+        'jobs_requests' => 'Job Requests',
+        'post_request' => 'Job Request',
+        'filter_by_sub_category' => 'Filter by Sub-Category',
+        
     )
     ?>

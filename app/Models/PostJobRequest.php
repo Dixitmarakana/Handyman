@@ -25,16 +25,17 @@ class PostJobRequest extends Model
     }
     public function scopeMyPostJob($query)
     {
-        if(auth()->user()->hasRole('admin')) {
+        if(auth()->user() && auth()->user()->hasRole('admin')) {
             return $query;
         }
-
-        if(auth()->user()->hasRole('user')) {
+        
+        if(auth()->user() && auth()->user()->hasRole('user')) {
             return $query->where('customer_id', \Auth::id());
         }
-        if(auth()->user()->hasRole('provider')) {
+        if(auth()->user() && auth()->user()->hasRole('provider')) {
             return $query;
         }
+        
         return $query;
     }
     public function postBidList(){

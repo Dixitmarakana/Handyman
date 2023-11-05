@@ -584,5 +584,9 @@ return [
   'sticker' => "Etichetta",
   'sticker_placeholder' => "Etichetta",
   'filter_by_city' => "Filtra per città",
+  'jobs_requests' => "Richieste di lavoro",
+  'post_request' => "Pubblica richiesta",
+  'filter_by_sub_category' => 'Filtra per sottocategoria',
+
 
 ];

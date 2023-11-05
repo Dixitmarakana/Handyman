@@ -529,5 +529,8 @@ return [
   'sticker' => 'Pegatina',
   'sticker_placeholder' => 'Pegatina',
   'filter_by_city' => "Filtrar por ciudad",
+  'jobs_requests' => "Solicitudes de trabajo",
+  'post_requests' => "Solicitud de publicación",
+  'filter_by_sub_category' => 'Filtrar por subcategoría',
 
 ];

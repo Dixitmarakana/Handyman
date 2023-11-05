@@ -36,6 +36,7 @@ class SubCategoryController extends Controller
 
         $subcategory = $subcategory->orderBy('name','asc')->paginate($per_page);
         $items = SubCategoryResource::collection($subcategory);
+        // dd($subcategory);
         $response = [
             'pagination' => [
                 'total_items' => $items->total(),

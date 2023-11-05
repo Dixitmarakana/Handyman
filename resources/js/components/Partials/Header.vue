@@ -39,7 +39,7 @@
                             >
                         </li>
                         <li class="nav-item"> 
-                            <router-link :to="{ name: 'jobs' }"   :class="(currentRouteName === 'jobs' || currentRouteName === 'jobs-detail'  ? activeRouteClass + ' nav-link' : 'nav-link' )"
+                            <router-link :to="{ name: 'jobs' }"   :class="(currentRouteName === 'jobs'  ? activeRouteClass + ' nav-link' : 'nav-link' )"
                             >{{__('messages.jobs')}}</router-link
                             >
                         </li>

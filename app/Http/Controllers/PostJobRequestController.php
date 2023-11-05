@@ -34,11 +34,14 @@ class PostJobRequestController extends Controller
     {
         $query = PostJobRequest::query();
         $filter = $request->filter;
-
+        $auth_user = authSession();
         if (isset($filter)) {
             if (isset($filter['column_status'])) {
                 $query->where('status', $filter['column_status']);
             }
+        }
+        if ($auth_user->user_type == 'user') {
+            $query->where('customer_id', auth()->user()->id);
         }
         if (auth()->user()->hasAnyRole(['admin'])) {
             $query->newQuery();

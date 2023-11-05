@@ -643,6 +643,9 @@ return [
         'sticker' => "Sticker",
         'sticker_placeholder' => "Sticker",
         'filter_by_city' => "Filter op stad",
+        'jobs_requests' => "Vacatures",
+        'post_request' => "Verzoek plaatsen",
+        'filter_by_sub_category' => 'Filter op subcategorie',
 
       
 ];

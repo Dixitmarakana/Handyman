@@ -23,8 +23,55 @@ class PostJobRequestController extends Controller
         $user = auth()->user();
         $post_request = PostJobRequest::myPostJob()->whereIn('status',['requested','accepted','assigned']);
         $per_page = config('constant.PER_PAGE_LIMIT');
+        // dd($request->all());
+        if($request->has('provider_id')){
+            $post_request->where('provider_id',$request->provider_id);        
+        }
 
-        $orderBy = $request->orderby ? $request->orderby: 'desc';
+        // if($request->has('category_id')){
+        //     $post_request->where('category_id',$request->category_id);
+        // }
+
+        // if($request->has('subcategory_id') && $request->subcategory_id != ''){
+        //     $post_request->whereIn('subcategory_id',explode(',',$request->subcategory_id));
+        // }
+
+        if ($request->has('country_id') && $request->country_id != '') {
+            $post_request->whereHas('provider', function ($a) use ($request) {
+                $a->whereHas('country', function ($b) use ($request) {
+                    $b->where('id', $request->country_id);
+                });
+            });
+        }
+
+        if ($request->has('city_id')) {
+            $post_request->whereHas('provider', function ($a) use ($request) {
+                $a->where('city_id', $request->city_id);
+            });
+        }
+
+        if ($request->has('sort_by')) {
+            $sort_by = $request->sort_by;
+            switch ($sort_by) {
+                case 'automatic':
+                    $post_request->orderBy('created_at','desc');
+                    break;
+                case 'lowest_price':
+                    $post_request->orderBy('price', 'asc');
+                    break;
+                case 'highest_price':
+                    $post_request->orderBy('price', 'desc');
+                    break;
+                case 'latest_service':
+                    $post_request->orderBy('updated_at', 'desc');
+                    break;
+                default:
+                    $post_request->orderBy('created_at','desc');
+                    break;
+            }
+        }  
+
+        // $orderBy = $request->orderby ? $request->orderby: 'desc';
 
         if( $request->has('per_page') && !empty($request->per_page)){
             if(is_numeric($request->per_page)){
@@ -35,7 +82,7 @@ class PostJobRequestController extends Controller
             }
         }
 
-        $post_request = $post_request->orderBy('id',$orderBy)->paginate($per_page);
+        $post_request = $post_request->paginate($per_page);
         $items = PostJobRequestResource::collection($post_request);
         $response = [
             'pagination' => [

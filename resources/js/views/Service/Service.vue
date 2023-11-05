@@ -81,6 +81,40 @@
                             ></multi-select>
                         </div>
                     </div>
+                    
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="subCategories" class="form-control-label mb-3">{{__('messages.filter_by_sub_category')}}</label>
+                            <multi-select
+                                deselect-label=""
+                                select-label=""
+                                @input="handleFilterChange"
+                                tag-placeholder="subCategories" 
+                                id="subCategories" 
+                                v-model="filterData.subcategory_id"
+                                label="name" 
+                                track-by="id" 
+                                :options="allSubCategories"
+                            ></multi-select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="sort_by" class="form-control-label mb-3">{{__('messages.sort_by')}}</label>
+                            <multi-select
+                            deselect-label=""
+                            select-label=""
+                            @input="handleFilterChange"
+                            tag-placeholder="Sort By"
+                            id="sort_by"
+                            v-model="filterData.sort_by"
+                            label="name"
+                            track-by="id"
+                            :options="sortingOptions"
+                            ></multi-select>
+                        </div>
+                    </div>
 
 
                     <div class="card">
@@ -107,11 +141,8 @@
                     <div v-if="loading" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 list-inline service-card-box">
                       <img :src="baseUrl+'/images/frontend/not_found.gif'"  class="datanotfound" />
                     </div>
-                 <div v-else-if="serviceList.length > 0" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 list-inline service-card-box">
-                    
+                 <div v-else-if="serviceList.length > 0" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 list-inline service-card-box">                    
                         <div v-for="(data, index) in serviceList" :key="index" class="col">
-
-
                               <service-list 
                                     :serviceId="data.id"
                                     :imageUrl="data.attchments[0] ? data.attchments[0] : baseUrl+'/images/default.png'"
@@ -150,7 +181,10 @@ export default {
     data(){
         return{
             loading: true,
-            filterData: {},
+            filterData: {
+                sub_category_id: {},
+                sort_by: null,
+            },
             componentKey: 0,
             serviceList:[],
             baseUrl:window.baseUrl,
@@ -185,6 +219,14 @@ export default {
         ],
         allcountry: [],
         allcities: [],
+        allSubCategories: [],
+        sortingOptions: [
+            { id: 'automatic', name: 'Automatic' },
+            { id: 'lowest_price', name: 'Lowest Price' },
+            { id: 'highest_price', name: 'Highest Price' },
+            { id: 'latest_service', name: 'Latest Service' },
+        ],
+
         }
     },
     computed: {
@@ -201,6 +243,7 @@ export default {
     created() {
         this.getAllCountries();
         this.getAllCities();
+        this.getAllSubCategories();
     },
     methods:{
         defaultFilterData: function () {
@@ -214,6 +257,8 @@ export default {
                 longitude:'',
                 country_id: {},
                 city_id: {},
+                subcategory_id: {},
+                sort_by: {},
             }
         },  
         getAllCountries() {
@@ -230,12 +275,11 @@ export default {
                 });
         },
         getAllCities() {
-            console.log("city");
-            console.log(this.filterData.country_id);
             if (this.filterData.country_id && this.filterData.country_id.id) {
             get(`city-list?country_id=${this.filterData.country_id.id}`)
                 .then((response) => {
                     if (response.status === 200) {
+                        console.log(response.data)
                         this.allcities = response.data;
                     } else {
                         this.allcities = [];
@@ -247,10 +291,13 @@ export default {
             }
 
         },
+        
+
         getServiceList(filterData=''){
             this.loading = true;
             var params= {
-                per_page: "all"
+                per_page: "all",
+                sort_by: this.filterData.sort_by,
             }
             var get_location_lat = localStorage.getItem('loction_current_lat')
             var get_location_long = localStorage.getItem('loction_current_long')
@@ -272,6 +319,8 @@ export default {
                     provider_id:filterData.provider_id.id,
                     country_id: filterData.country_id ? filterData.country_id.id : '',
                     city_id: filterData.city_id ? filterData.city_id.id : '',
+                    subcategory_id: filterData.subcategory_id ? filterData.subcategory_id.id : '',
+                    sort_by: filterData.sort_by ? filterData.sort_by.id : '',
                     is_price_min:filterData.is_price_min,
                     is_price_max:filterData.is_price_max,
                     latitude:latitude,
@@ -295,9 +344,8 @@ export default {
                 params: params
             })
             .then((response) => {
+                // console.log(response);
                 if(response.status === 200){
-                    console.log("Here");
-                    console.log(response);
                     this.serviceList = response.data.data;
                     if(response.data.max !=null  && response.data.min !=null){
 
@@ -320,14 +368,32 @@ export default {
          
         handleFilterChange(){
             var slidercurrentval=this.$refs.slider.noUiSlider.get()
-            console.log(slidercurrentval);
             this.filterData.is_price_min= slidercurrentval[0]
             this.filterData.is_price_max= slidercurrentval[1]
-            console.log(this.filterData.is_price_min);
-            console.log(this.filterData.is_price_max);
             this.getAllCities();
+            this.getAllSubCategories();
             let filterData = Object.assign({}, this.filterData);
             this.getServiceList(filterData);
+        },
+        getAllSubCategories() {
+            // console.log(this.filterData.category_id.id);
+            if (this.filterData.category_id && this.filterData.category_id.id) {
+            get(`subcategory-list?category_id=${this.filterData.category_id.id}`)
+                .then((response) => {
+                    if (response.status === 200) {
+                        this.allSubCategories = response.data;
+                        this.allSubCategories = this.allSubCategories.data;
+                        console.log(this.allSubCategories)
+                } else {
+                    this.allSubCategories = [];
+                }
+                })
+                .catch((error) => {
+                console.error("Error fetching sub-category list:", error);
+                });
+            } else {
+            this.allSubCategories = [];
+            }
         },
         pricesliderinit(){
 

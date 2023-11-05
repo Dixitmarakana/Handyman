@@ -38,7 +38,11 @@ class ServiceController extends Controller
     // get datatable data
     public function index_data(DataTables $datatable,Request $request)
     {
-        
+
+        if(auth()->user()->hasRole('provider')){
+            $query = Service::query()->where('provider_id', \Auth::id());
+
+        }
         if(auth()->user()->hasRole('provider')){
             $query = Service::query()->where('provider_id', \Auth::id());
 
@@ -202,6 +206,7 @@ class ServiceController extends Controller
      */
     public function store(ServiceRequest $request)
     {
+        dd(demoUserPermission());
         if(demoUserPermission()){
             return  redirect()->back()->withErrors(trans('messages.demo_permission_denied'));
         }

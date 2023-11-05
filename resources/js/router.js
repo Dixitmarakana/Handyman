@@ -45,7 +45,7 @@ const routes = [
     { path: '/refund-cancellation-policy', name: 'refund-cancellation-policy', component: RefundPolicy, meta: { label: 'Refund Policy',homeName:'Refund Policy' } },
     { path: '/blog', name: 'blog', component: Blog, meta: { label: 'Blog List', homeName:'Blog' } },
     { path: '/blog-detail/:blog_id', name: 'blog-detail', component: BlogDetail, meta: { label: 'Blog Detail',homeName:'Blog' } },
-    { path: '/jobs', name: 'jobs', component: Jobs, meta: { label: 'Job List', homeName:'Jobs' } },
+    { path: '/jobs', name: 'jobs', component: Jobs, meta: { label: 'Jobs', homeName:'Jobs' } },
 
 ];
 const router = new VueRouter({

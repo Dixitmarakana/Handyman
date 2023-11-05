@@ -25,7 +25,7 @@ class ServiceController extends Controller
 {
     public function getServiceList(Request $request){
 
-        $service = Service::where('service_type','service')->with(['providers','category','serviceRating'])->orderBy('created_at','desc');
+        $service = Service::where('service_type','service')->with(['providers','category','serviceRating']);
 
         $category = Category::onlyTrashed()->get();
         $category = $category->pluck('id');
@@ -61,7 +61,7 @@ class ServiceController extends Controller
                 });
             });
         }
-        
+         
         if($request->has('is_featured')){
             $service->where('is_featured',$request->is_featured);
         }
@@ -122,15 +122,37 @@ class ServiceController extends Controller
 
         if(auth()->user() !== null && auth()->user()->hasRole('admin')){
 
-            $service = $service->orderBy('created_at','desc');
+            // $service = $service->orderBy('created_at','desc');
+            $service = $service;
            
         }else{
 
-            $service = $service->where('status',1)->orderBy('created_at','desc');
+            // $service = $service->where('status',1)->orderBy('created_at','desc');
+            $service = $service->where('status',1);
 
         }
         // dd($service->get());
-
+        if ($request->has('sort_by')) {
+            $sort_by = $request->sort_by;
+            switch ($sort_by) {
+                case 'automatic':
+                    $service->orderBy('created_at','desc');
+                    break;
+                case 'lowest_price':
+                    $service->orderBy('price', 'asc');
+                    break;
+                case 'highest_price':
+                    $service->orderBy('price', 'desc');
+                    break;
+                case 'latest_service':
+                    $service->orderBy('updated_at', 'desc');
+                    break;
+                default:
+                    $service->orderBy('created_at','desc');
+                    break;
+            }
+        }   
+        // dd($service->toSql());
         $service = $service->paginate($per_page);
      
         $items = ServiceResource::collection($service);

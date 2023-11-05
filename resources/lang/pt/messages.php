@@ -583,5 +583,7 @@ return [
   'sticker' => "Adesiva",
   'sticker_placeholder' => "Adesiva",
   'filter_by_country' => 'Filtrar por cidade',
+  'jobs_requests' => "Solicitação de postagem",
+  'filter_by_sub_category' => 'Filtrar por subcategoria',
 
 ];
