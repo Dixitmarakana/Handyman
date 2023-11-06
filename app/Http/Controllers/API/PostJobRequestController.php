@@ -23,19 +23,10 @@ class PostJobRequestController extends Controller
         $user = auth()->user();
         $post_request = PostJobRequest::myPostJob()->whereIn('status',['requested','accepted','assigned']);
         $per_page = config('constant.PER_PAGE_LIMIT');
-        // dd($request->all());
         if($request->has('provider_id')){
             $post_request->where('provider_id',$request->provider_id);        
         }
-
-        // if($request->has('category_id')){
-        //     $post_request->where('category_id',$request->category_id);
-        // }
-
-        // if($request->has('subcategory_id') && $request->subcategory_id != ''){
-        //     $post_request->whereIn('subcategory_id',explode(',',$request->subcategory_id));
-        // }
-
+        
         if ($request->has('country_id') && $request->country_id != '') {
             $post_request->whereHas('provider', function ($a) use ($request) {
                 $a->whereHas('country', function ($b) use ($request) {
@@ -43,8 +34,8 @@ class PostJobRequestController extends Controller
                 });
             });
         }
-
-        if ($request->has('city_id')) {
+        
+        if ($request->has('city_id') && $request->city_id != '') {
             $post_request->whereHas('provider', function ($a) use ($request) {
                 $a->where('city_id', $request->city_id);
             });

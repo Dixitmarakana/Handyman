@@ -175,7 +175,6 @@ export default {
             baseUrl:window.baseUrl,
             maxVal:0,
 	        minVal:0,
-            getjobList:{},
             ratingData:[
                 {
                     id:1,
@@ -221,13 +220,12 @@ export default {
     mounted() {
         console.log('Component mounted');
         this.filterData = this.defaultFilterData();
-        this.getjobList();
+        this.getServiceList();
         this.loading = true;
     },
     created() {
         this.getAllCountries();
         this.getAllCities();
-        // this.getAllSubCategories();
     },
     methods: {
         defaultFilterData: function () {
@@ -275,7 +273,7 @@ export default {
             }
 
         },
-        getjobList(filterData=''){
+        getServiceList(filterData=''){
             this.loading = true;
             var params= {
                 per_page: "all",
@@ -312,7 +310,7 @@ export default {
                 params: params
             })
             .then((response) => {
-                // console.log(response);
+                console.log("response from api", response);
                 if(response.status === 200){
                     this.jobList = response.data.data;
                 }else{
@@ -321,67 +319,18 @@ export default {
                 this.loading = false; 
             });
         },
-         
-        // async getjobList() {
-        //     try {
-        //         console.log('Fetching job list');
-        //         this.loading = true;
-        //         const params = {
-        //             per_page: "all"
-        //         };
-        //         const response = await get("get-job-list", { params }); // Make an API request to fetch job list
-        //         console.log('API Response: ', response);
-        //         if (response.status === 200) {
-        //             this.jobList = response.data.data; // Set the API response data to the jobList
-        //             console.log('data: ' , this.jobList); // Set the API response data to the jobList
-        //         } else {
-        //             this.jobList = []; // Handle the case where the response status is not 200
-        //         }
-        //     } catch (error) {
-        //         console.error("Error fetching job list: ", error);
-        //         this.jobList = []; // Handle the error as required
-        //     } finally {
-        //         this.loading = false;
-        //     }
-        // },
         handleFilterChange(){
             this.getAllCities();
             let filterData = Object.assign({}, this.filterData);
-            console.log("HJere",filterData);
-            this.getJobList(filterData);
-        },
-        // getAllSubCategories() {
-        //     // console.log(this.filterData.category_id.id);
-        //     if (this.filterData.category_id && this.filterData.category_id.id) {
-        //     get(`subcategory-list?category_id=${this.filterData.category_id.id}`)
-        //         .then((response) => {
-        //             if (response.status === 200) {
-        //                 this.allSubCategories = response.data;
-        //                 this.allSubCategories = this.allSubCategories.data;
-        //                 // console.log(this.allSub3Categories)
-        //         } else {
-        //             this.allSubCategories = [];
-        //         }
-        //         })
-        //         .catch((error) => {
-        //         console.error("Error fetching sub-category list:", error);
-        //         });
-        //     } else {
-        //     this.allSubCategories = [];
-        //     }
-        // },
-        handleFilterChange(){
-            this.getAllCities();
-            console.log("HJere",this.filterData);
-            let filterData = Object.assign({}, this.filterData);
-            this.getJobList(filterData);
+            this.getServiceList(filterData);
+            console.log(filterData);
         },
         resetFilter(){
-           this.filterData.category_id = ''
            this.filterData.provider_id = ''
-           this.filterData.is_price_min = ''
-           this.filterData.is_price_max = ''
-           this.getjobList(this.filterData)
+           this.filterData.country_id = ''
+           this.filterData.city_id = ''
+           this.filterData.sort_by = ''
+           this.getServiceList(this.filterData)
         }
 
     }

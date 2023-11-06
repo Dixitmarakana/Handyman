@@ -233,6 +233,7 @@ export default {
         ...mapGetters(['allcategory','allprovider','currencySymobl'])
     },
     mounted(){
+        console.log('Component mounted');
         this.filterData = this.defaultFilterData();
         this.getServiceList();
         this.loading = true;

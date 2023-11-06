@@ -11,7 +11,7 @@
                         <div class="d-flex justify-content-between align-items-center p-3 flex-wrap gap-3">
                             <h5 class="font-weight-bold">{{ $pageTitle ?? trans('messages.list') }}</h5>
                             @if(auth()->user()->user_type == 'user')
-                              <a href="{{ route('bank.create') }}" class="float-right mr-1 btn btn-sm btn-primary"><i class="fa fa-plus-circle"></i> {{ trans('messages.add_form_title',['form' => trans('messages.post_request')  ]) }}</a>
+                              <a href="{{ route('post-job-request.create') }}" class="float-right mr-1 btn btn-sm btn-primary"><i class="fa fa-plus-circle"></i> {{ trans('messages.add_form_title',['form' => trans('messages.post_request')  ]) }}</a>
                             @endif
                           </div>
                        
@@ -25,7 +25,7 @@
         <div class="row justify-content-between">
             <div>
                 <div class="col-md-12">
-                  <form action="{{ route('post-job.bulk-action') }}" id="quick-action-form" class="form-disabled d-flex gap-3 align-items-center">
+                  <form action="{{ route('post-job-request.create') }}" id="" class="form-disabled d-flex gap-3 align-items-center">
                     @csrf
                   <select name="action_type" class="form-control select2" id="quick-action-type" style="width:100%" disabled>
                       <option value="">{{__('messages.no_action')}}</option>

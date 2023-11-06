@@ -52,7 +52,12 @@ class PostJobRequestController extends Controller
                 return '<input type="checkbox" class="form-check-input select-table-row"  id="datatable-row-'.$row->id.'"  name="datatable_ids[]" value="'.$row->id.'" onclick="dataTableRowCheck('.$row->id.')">';
             })
             ->editColumn('title', function($query){
-                return '<a class="btn-link btn-link-hover"  href='.route('postjobrequest.service',$query->id).'>'.$query->title.'</a>';
+                if (authSession()->user_type == 'user') {
+                    return $query->title;
+                } else {
+                    return '<a class="btn-link btn-link-hover"  href='.route('postjobrequest.service', $query->id).'>'.$query->title.'</a>';
+                }
+                // return '<a class="btn-link btn-link-hover"  href='.route('postjobrequest.service',$query->id).'>'.$query->title.'</a>';
             })
             ->editColumn('provider_id' , function ($query){
                 return ($query->provider_id != null && isset($query->provider)) ? $query->provider->display_name : '-';
@@ -118,7 +123,7 @@ class PostJobRequestController extends Controller
      */
     public function create()
     {
-        //
+        return view('post-job-request.create');
     }
 
     /**
