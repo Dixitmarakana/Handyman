@@ -532,5 +532,6 @@ return [
   'jobs_requests' => "Solicitudes de trabajo",
   'post_requests' => "Solicitud de publicación",
   'filter_by_sub_category' => 'Filtrar por subcategoría',
+  'post_job' => 'Trabajo posterior',
 
 ];

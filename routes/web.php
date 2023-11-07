@@ -357,6 +357,7 @@ Route::group(['middleware' => ['auth', 'verified']], function()
         Route::get('post-job-index-data',[PostJobRequestController::class,'index_data'])->name('post-job.index_data');
         Route::post('post-job-bulk-action', [PostJobRequestController::class, 'bulk_action'])->name('post-job.bulk-action');
         Route::get('post-job-service/list/{postjobid?}', [ServiceController::class, 'index'])->name('postjobrequest.service');
+        Route::post('post-job-request-save',[PostJobRequestController::class,'savePostJob'])->name('postJobRequest.save');
     });
 
     Route::group(['middleware' => ['permission:servicepackage list']], function () {

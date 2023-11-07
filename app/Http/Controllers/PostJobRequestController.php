@@ -7,6 +7,9 @@ use App\Models\PostJobRequest;
 use App\DataTables\PostjobRequestsDataTable;
 use App\DataTables\PostJobBidDataTable;
 use Yajra\DataTables\DataTables;
+use App\Models\User;
+use App\Models\Country;
+use App\Models\Category;
 
 class PostJobRequestController extends Controller
 {
@@ -116,6 +119,8 @@ class PostJobRequestController extends Controller
         return response()->json(['status' => true, 'message' => 'Bulk Action Updated']);
     }
 
+    
+
     /**
      * Show the form for creating a new resource.
      *
@@ -123,12 +128,34 @@ class PostJobRequestController extends Controller
      */
     public function create()
     {
-        return view('post-job-request.create');
+        $auth_user = authSession();
+        $postJob = new PostJobRequest;
+        $pageTitle = __('messages.update_form_title',['form'=> __('messages.post_job')]);
+        return view('post-job-request.create',compact('postJob','pageTitle','auth_user'));
+    }
+
+    public function savePostJob(Request $request){
+        $postJob = new PostJobRequest;
+        $postJob->title = $request->job_title;
+        $postJob->description = $request->description;
+        $postJob->provider_id = $request->provider_id;
+        $postJob->customer_id = auth()->user()->id;
+        $postJob->price = $request->price;
+        $postJob->job_price = $request->job_price;
+        $postJob->country_id = $request->country_id;
+        $postJob->state_id = $request->state_id;
+        $postJob->category_id = $request->category_id;
+        $postJob->subcategory_id = $request->subcategory_id;
+        $postJob->save();
+        $message = __('messages.update_form',[ 'form' => __('messages.postrequest') ] );
+
+		return redirect(route('post-job-request.index'))->withSuccess($message);
+
     }
 
     /**
      * Store a newly created resource in storage.
-     *
+     *b =
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */

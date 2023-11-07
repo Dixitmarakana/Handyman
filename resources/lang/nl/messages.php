@@ -646,6 +646,6 @@ return [
         'jobs_requests' => "Vacatures",
         'post_request' => "Verzoek plaatsen",
         'filter_by_sub_category' => 'Filter op subcategorie',
-
+        'post_job' => 'Plaats een vacature',
       
 ];

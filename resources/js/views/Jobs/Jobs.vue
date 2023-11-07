@@ -15,7 +15,7 @@
                         </div>                           
                     </div>
                
-                    <!-- <div class="row">
+                    <div class="row">
                         <div class="form-group">
                             <label for="status" class="form-control-label mb-3">{{__('messages.filter_by_category')}}</label>
                             <multi-select
@@ -32,7 +32,7 @@
                                     track-by="id" 
                             ></multi-select>
                         </div>
-                    </div> -->
+                    </div>
 
                     <div class="row">
                         <div class="form-group">
@@ -82,7 +82,7 @@
                         </div>
                     </div>
                     
-                    <!-- <div class="row">
+                    <div class="row">
                         <div class="form-group">
                             <label for="subCategories" class="form-control-label mb-3">{{__('messages.filter_by_sub_category')}}</label>
                             <multi-select
@@ -97,7 +97,7 @@
                                 :options="allSubCategories"
                             ></multi-select>
                         </div>
-                    </div> -->
+                    </div>
 
                     <div class="row">
                         <div class="form-group">
@@ -226,6 +226,7 @@ export default {
     created() {
         this.getAllCountries();
         this.getAllCities();
+        this.getAllSubCategories();
     },
     methods: {
         defaultFilterData: function () {
@@ -321,9 +322,30 @@ export default {
         },
         handleFilterChange(){
             this.getAllCities();
+            this.getAllSubCategories();
             let filterData = Object.assign({}, this.filterData);
             this.getServiceList(filterData);
             console.log(filterData);
+        },
+        getAllSubCategories() {
+            // console.log(this.filterData.category_id.id);
+            if (this.filterData.category_id && this.filterData.category_id.id) {
+            get(`subcategory-list?category_id=${this.filterData.category_id.id}`)
+                .then((response) => {
+                    if (response.status === 200) {
+                        this.allSubCategories = response.data;
+                        this.allSubCategories = this.allSubCategories.data;
+                        console.log(this.allSubCategories)
+                } else {
+                    this.allSubCategories = [];
+                }
+                })
+                .catch((error) => {
+                console.error("Error fetching sub-category list:", error);
+                });
+            } else {
+            this.allSubCategories = [];
+            }
         },
         resetFilter(){
            this.filterData.provider_id = ''

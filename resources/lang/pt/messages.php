@@ -585,5 +585,6 @@ return [
   'filter_by_country' => 'Filtrar por cidade',
   'jobs_requests' => "Solicitação de postagem",
   'filter_by_sub_category' => 'Filtrar por subcategoria',
+  'post_job' => 'Publicar trabalho',
 
 ];

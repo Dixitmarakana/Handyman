@@ -587,6 +587,6 @@ return [
   'jobs_requests' => "Richieste di lavoro",
   'post_request' => "Pubblica richiesta",
   'filter_by_sub_category' => 'Filtra per sottocategoria',
-
+  'post_job' => 'Pubblica lavoro',
 
 ];
