@@ -21,4 +21,14 @@ class ProviderSubscription extends Model
     public function payment(){
         return $this->belongsTo(SubscriptionTransaction::class, 'subscription_plan_id','id');
     }
+
+    public function user(){
+        return $this->belongsTo(User::class, 'id','user_id');
+    }
+
+    public function plan()
+    {
+        return $this->belongsTo(Plans::class, 'plan_id', 'id');
+    }
+
 }

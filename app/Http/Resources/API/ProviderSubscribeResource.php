@@ -29,6 +29,8 @@ class ProviderSubscribeResource extends JsonResource
             'description'       => $this->description,
             'plan_type'         => $this->plan_type,
             'plan_limitation'   => json_decode($this->plan_limitation,true),
+            'plan_name'         => optional($this->plan)->title,
+            'plan_image'        => optional($this->plan)->image,
         ];
     }
 }

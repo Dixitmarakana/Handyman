@@ -590,5 +590,6 @@ return [
   'post_request' => "Demande de publication",
   'filter_by_sub_category' => 'Filtrer par sous-catégorie',
   'post_job' => "Publier une offre d'emploi",
+  'plan_image' => 'Image du plan',
 
 ];

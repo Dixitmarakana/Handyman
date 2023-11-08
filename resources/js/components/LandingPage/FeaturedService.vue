@@ -18,6 +18,7 @@
                         :serviceProviderImg="data.provider_image"
                         :serviceProvider="data.provider_name"
                         :cityName="data.city_name"
+                        :isVarified="data.is_varified"
                         :countryName="data.country_name"
                         :serviceType="data.type"
                         :categoryName="data.category_name"

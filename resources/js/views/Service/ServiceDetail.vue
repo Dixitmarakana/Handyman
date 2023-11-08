@@ -134,6 +134,7 @@
                                                 :serviceDescription="data.description"
                                                 :serviceProviderImg="data.provider_image"
                                                 :serviceProvider="data.provider_name"
+                                                :is_varified="data.is_varified"
                                                 :countryName="data.country_name"
                                                 :cityName="data.city_name"
                                                 :serviceType="data.type"
@@ -165,6 +166,12 @@
                             <div class="card-body">
                                     <div class="sidebar-title">
                                     <h5 class="title">{{__('messages.provider')}}</h5>
+                                    <div class="ms-2" v-if="provider.is_varified == 1">
+                                        <img :src="getImageUrl()" alt="Image" class="img-fluid avatar avatar-35 avatar-rounded" />
+                                    </div>
+                                    <div class="ms-2" v-if="provider.plan_image != null">
+                                        <img :src="getPlanImageUrl(provider.plan_image)" alt="Image" class="img-fluid avatar avatar-35 avatar-rounded" />
+                                    </div>
                                 </div>
                                 <div class="provider-info">
                                     <div class="d-sm-flex d-flex">
@@ -295,7 +302,8 @@ export default {
             ratingData:{},
             relatedService:{},
             skills:{},
-            baseUrl:window.baseUrl
+            baseUrl:window.baseUrl,
+            baseUrl: process.env.BASE_URL,
         }
     },
     watch: {
@@ -315,6 +323,12 @@ export default {
         this.serviceDetail()
     },
     methods:{
+        getImageUrl() {
+            return baseUrl+"/images/varification.png";
+        },
+        getPlanImageUrl(plan_image) {
+            return baseUrl+"/images/plans/"+plan_image;
+        },
         serviceDetail(){
             post("service-detail", {
                 service_id: this.$route.params.service_id,

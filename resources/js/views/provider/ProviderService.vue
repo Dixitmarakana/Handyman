@@ -28,6 +28,7 @@
                                         :serviceProvider="data.provider_name"
                                         :countryName="data.country_name"
                                         :cityName="data.city_name"
+                                        :isVarified="data.is_varified"
                                         :serviceType="data.type"
                                         :categoryName="data.category_name"
                                         :subcategoryName="data.subcategory_name"

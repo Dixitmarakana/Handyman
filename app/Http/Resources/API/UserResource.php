@@ -34,6 +34,11 @@ class UserResource extends JsonResource
         }else{
             $profile_image = getSingleMedia($this, 'profile_image',null);
         }  
+        $planImage = null;
+        if ($this->providerSubscriptions->isNotEmpty()) {
+            $providerSubscription = $this->providerSubscriptions->first();
+            $planImage = optional($providerSubscription->plan)->image;
+        }
         return [
             'id'                => $this->id,
             'first_name'        => $this->first_name,
@@ -68,6 +73,7 @@ class UserResource extends JsonResource
             'providers_service_rating' => $providers_service_rating,
             'handyman_rating' => $handyman_rating,
             'is_verify_provider' => (int) $is_verify_provider,
+            'is_varified' => $this->is_varified,
             'isHandymanAvailable' =>  $this->is_available,
             'designation' => $this->designation,
             'handymantype_id' => $this->handymantype_id,
@@ -77,6 +83,7 @@ class UserResource extends JsonResource
             'is_favourite'  => UserFavouriteProvider::where('user_id',$request->login_user_id)->where('provider_id',$request->id)->first() ? 1 : 0,
             'player_ids' =>$this->playerids->pluck('player_id'),
             'total_services_booked' => Booking::where('provider_id',$this->id)->count('service_id'),
+            'plan_image' => $planImage,
         ];
     }
 }

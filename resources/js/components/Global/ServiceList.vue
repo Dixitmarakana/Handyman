@@ -27,6 +27,13 @@
                 <div class="user-info d-flex align-items-center">
                     <img :src="serviceProviderImg" alt="image" class="img-fluid avatar avatar-35 avatar-rounded"/>
                     <span class="ms-2">{{ serviceProvider }}</span>
+                    <!-- <span class="ms-2">planImg: {{ isVarifiedImg }}</span> -->
+                    <!-- <div class="ms-2" v-if="isVarifiedImg == 1">
+                        <img :src="getImageUrl()" alt="Image" class="img-fluid avatar avatar-35 avatar-rounded" />
+                    </div>  -->
+                    <!-- <div class="ms-2">
+                        <img :src="getPlanImageUrl(planImg)" alt="Image" class="img-fluid avatar avatar-35 avatar-rounded" />
+                    </div>                 -->
                 </div>
                 <div class="location-info">
                     <span class="ms-2">{{ displayLocation }}</span>
@@ -38,6 +45,12 @@
 <script>
 import Favorite from './Favorite.vue'
 export default {
+    data() {
+        return {
+            baseUrl: process.env.BASE_URL
+        }
+    },
+
   components: { Favorite },
     name:'ServiceList',
     props:{
@@ -49,6 +62,8 @@ export default {
         serviceRating: { type: Number },
         serviceDescription: { type: String },
         serviceProviderImg: { type: String },
+        isVarifiedImg: { type: String },
+        planImg: { type: String },
         countryName: { type: String },
         cityName: { type: String },
         serviceProvider: { type: String },
@@ -65,6 +80,12 @@ export default {
         }
     },
     methods:{
+        getImageUrl() {
+            return baseUrl+"/images/varification.png";
+        },
+        getPlanImageUrl(planImg) {
+            return baseUrl+"/images/plans/"+planImg;
+        },
         scrolltitle(title){
 
           if(title !=null){

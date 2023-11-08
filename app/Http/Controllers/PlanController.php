@@ -145,7 +145,10 @@ class PlanController extends Controller
         if ($plans !== null && $request->id == null) {
             return  redirect()->back()->withErrors(__('validation.unique',['attribute'=>__('messages.plan')]));
         }
-
+        
+        $imageName = time() . mt_rand(1000, 9999) . '.' . $request->plan_image->extension();
+        $request->plan_image->move(public_path('images/plans'), $imageName);
+    
         $planData = [
             'title' => $requestData['title'],
             'amount' => $requestData['amount'],
@@ -153,7 +156,8 @@ class PlanController extends Controller
             'duration' => $requestData['duration'],
             'description' => $requestData['description'],
             'plan_type' => $requestData['plan_type'],
-            'type'=> $requestData['type']
+            'type'=> $requestData['type'],
+            'image' => $imageName
         ];
         if(empty($request->id) && $request->id == null){
             $planData['identifier'] = strtolower($requestData['title']);

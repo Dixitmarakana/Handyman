@@ -52,7 +52,9 @@ class DashboardController extends Controller
         $service = Service::where('status',1)->where('service_type','service');
 
         $service->with(['providers' => function ($query) {
-            $query->with('country');
+            $query->with(['subscriptions' => function ($subQuery) {
+                $subQuery->with('plan');
+            }]);
         }]);
 
         if ($request->has('city_id') && !empty($request->city_id)) {
@@ -72,12 +74,15 @@ class DashboardController extends Controller
         $service = $service->orderBy('id','desc')->paginate($per_page);
 
         $service = $service->map(function ($item) {
-        // Assuming that 'providers' is the relationship for the user in the Service model
             $item->providers->each(function ($provider) {
-                $provider->country_name = optional($provider->country)->name;
+                    $provider->country_name = optional($provider->country)->name;
+                    $provider->subscriptions->each(function ($subscription) {
+                    $subscription->plan_image = optional($subscription->plan)->image;
+                });
             });
             return $item;
         });
+        
 
         $service = ServiceResource::collection($service);
         if(default_earning_type() === 'subscription'){
@@ -88,6 +93,7 @@ class DashboardController extends Controller
             if ($request->has('city_id') && !empty($request->city_id)) {
                 $provider = $provider->where('city_id', $request->city_id);
             }
+        
         $provider = $provider->paginate($per_page);
 
         $provider = UserResource::collection($provider);

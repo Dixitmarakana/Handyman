@@ -47,6 +47,10 @@
                                     </select>
                                     
                                 </div>
+                                <div class="form-group col-md-4">
+                                    <label class="custom-file-label upload-label" for="plan_image">{{ __('messages.plan_image') }}</label>
+                                    <input type="file" name="plan_image" class="custom-file-input custom-file-input-sm detail" id="plan_image" lang="en" accept="image/*">
+                                </div>                                
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-12 ">

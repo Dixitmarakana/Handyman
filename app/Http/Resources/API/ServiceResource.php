@@ -18,6 +18,11 @@ class ServiceResource extends JsonResource
         $image = getSingleMedia($this,'service_attachment', null);
         $file_extention = config('constant.IMAGE_EXTENTIONS');
         $extention = in_array(strtolower(imageExtention($image)),$file_extention);
+        $subscriptions = $this->providers->subscriptions; // Ensure subscriptions are loaded
+
+        $subscriptions->each(function ($subscription) {
+            $subscription->load('plan'); // Eager load the 'plan' relationship
+        });
         return [
             'id'            => $this->id,
             'name'          => $this->name,
@@ -36,6 +41,7 @@ class ServiceResource extends JsonResource
             'provider_image' => optional($this->providers)->login_type != null ?  optional($this->providers)->social_image : getSingleMedia(optional($this->providers), 'profile_image',null),
             'city_id' => optional($this->providers)->city_id,
             'country_name' => optional($this->providers->country)->name,
+            'plan_image' => $subscriptions->first()->plan->image ?? null, // Access the 'plan' relationship
             'city_name' => optional($this->providers->city)->name,
             'category_name'  => optional($this->category)->name,
             'subcategory_name'  => optional($this->subcategory)->name,
@@ -44,6 +50,7 @@ class ServiceResource extends JsonResource
             'total_review'  => $this->serviceRating->count('id'),
             'total_rating'  => count($this->serviceRating) > 0 ? (float) number_format(max($this->serviceRating->avg('rating'),0), 2) : 0,
             'is_favourite'  => $this->getUserFavouriteService->where('user_id',$user_id)->first() ? 1 : 0,
+            'is_varified'  => optional($this->providers)->is_varified,
             'service_address_mapping' => $this->providerServiceAddress,
             'attchment_extension' => $extention, //true:for png false: other
             'deleted_at'        => $this->deleted_at,
@@ -52,6 +59,7 @@ class ServiceResource extends JsonResource
             'total_review' => count($this->serviceRating),
             'is_enable_advance_payment' => $this->is_enable_advance_payment,
             'advance_payment_amount' => $this->advance_payment_amount== null ? 0:(double) $this->advance_payment_amount,
+        
         ];
     }
 }

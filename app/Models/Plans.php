@@ -10,7 +10,7 @@ class Plans extends Model
     use HasFactory;
     protected $table = 'plans';
     protected $fillable = [
-        'title', 'identifier', 'type', 'amount','status','duration','description','trial_period','plan_type'
+        'title', 'identifier', 'type', 'amount','status','duration','description','trial_period','plan_typem','image'
     ];
     protected $casts = [
         'amount'    => 'double',

@@ -24,6 +24,12 @@
                             <div class="location-info">
                                 <span class="ms-2">{{ displayLocation(data) }}</span>
                             </div>
+                            <div class="ms-2" v-if="data.is_varified == 1">
+                                <img :src="getImageUrl()" alt="Image" class="img-fluid avatar avatar-35 avatar-rounded" />
+                            </div>
+                            <div class="ms-2" v-if="data.plan_image != null">
+                                <img :src="getPlanImageUrl(data.plan_image)" alt="Image" class="img-fluid avatar avatar-35 avatar-rounded" />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -41,6 +47,12 @@ export default {
       }
     },
     methods: {
+        getImageUrl() {
+            return baseUrl+"/images/varification.png";
+        },
+        getPlanImageUrl(planImg) {
+            return baseUrl+"/images/plans/"+planImg;
+        },
         displayLocation(data) {
             if (data.city_name && data.country_name) {
                 return data.city_name + ' - ' + data.country_name;

@@ -668,6 +668,7 @@
         'post_request' => 'Job Request',
         'filter_by_sub_category' => 'Filter by Sub-Category',
         'post_job' => 'Post Job',
+        'plan_image' => 'Plan Image',
         
     )
     ?>

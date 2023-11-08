@@ -154,7 +154,7 @@ class ServiceController extends Controller
         }   
         // dd($service->toSql());
         $service = $service->paginate($per_page);
-     
+
         $items = ServiceResource::collection($service);
 
         $userservices  = null;
@@ -164,7 +164,7 @@ class ServiceController extends Controller
         }
         $response = [
             'pagination' => [
-                'total_items' => $items->total(),
+                'total_items' => $items->count(),
                 'per_page' => $items->perPage(),
                 'currentPage' => $items->currentPage(),
                 'totalPages' => $items->lastPage(),

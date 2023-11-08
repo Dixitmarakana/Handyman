@@ -586,5 +586,6 @@ return [
   'jobs_requests' => "Solicitação de postagem",
   'filter_by_sub_category' => 'Filtrar por subcategoria',
   'post_job' => 'Publicar trabalho',
+  'plan_image' => 'Imagem do plano',
 
 ];

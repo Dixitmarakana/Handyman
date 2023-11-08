@@ -24,7 +24,7 @@ class User extends Authenticatable implements HasMedia
         'username', 'first_name', 'last_name', 'email', 'password', 'user_type', 'address', 'contact_number', 'email_verified_at', 'remember_token',
         'handymantype_id',
         'player_id','country_id', 'state_id',  'city_id' , 'address', 'provider_id' , 'status', 
-        'display_name', 'providertype_id' , 'is_featured' , 'time_zone' ,'last_notification_seen' , 'login_type','service_address_id' , 'uid','is_subscribe',
+        'display_name', 'providertype_id' , 'is_featured' , 'time_zone' ,'last_notification_seen' , 'login_type','service_address_id' , 'uid','is_subscribe','is_varified',
         'social_image','is_available','designation','last_online_time',
         'known_languages','skills','description','company','vat_number'
     ];
@@ -60,6 +60,7 @@ class User extends Authenticatable implements HasMedia
         'service_address_id'            => 'integer',
         'is_subscribe'            => 'integer',
         'is_available'            => 'integer',
+        'is_varified'            => 'integer',
         'slots_for_all_services' => 'integer'
     ];
 
@@ -238,5 +239,21 @@ class User extends Authenticatable implements HasMedia
     public function scopeList($query)
     {
         return $query->orderBy('updated_at', 'desc');
+    }
+    public function providerSubscription()
+    {
+        return $this->hasOne(ProviderSubscription::class, 'user_id');
+    }
+    public function plan()
+    {
+        return $this->hasOneThrough(Plan::class, ProviderSubscription::class, 'plan_id', 'id', 'id', 'plan_id');
+    }
+    public function providerSubscriptions()
+    {
+        return $this->hasMany(ProviderSubscription::class, 'user_id');
+    }
+    public function subscriptions()
+    {
+        return $this->hasMany(ProviderSubscription::class, 'user_id', 'id');
     }
 }
