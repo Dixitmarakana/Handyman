@@ -589,5 +589,6 @@ return [
   'filter_by_sub_category' => 'Filtra per sottocategoria',
   'post_job' => 'Pubblica lavoro',
   'plan_image' => 'Immagine in piano',
+  'filter_by_text' => 'Testo',
 
 ];

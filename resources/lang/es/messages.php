@@ -534,5 +534,6 @@ return [
   'filter_by_sub_category' => 'Filtrar por subcategoría',
   'post_job' => 'Trabajo posterior',
   'plan_image' => 'Imagen del plano',
+  'filter_by_text' => 'Texto'
 
 ];

@@ -648,5 +648,6 @@ return [
         'filter_by_sub_category' => 'Filter op subcategorie',
         'post_job' => 'Plaats een vacature',
         'plan_image' => 'Plan afbeelding',
+        'filter_by_text' => 'Tekst',
       
 ];

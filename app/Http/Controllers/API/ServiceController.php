@@ -108,7 +108,8 @@ class ServiceController extends Controller
         }
 
         if($request->has('search')){
-            $service->where('name','like',"%{$request->search}%");
+            $service->where('name','like',"%{$request->search}%")
+                    ->orWhere('description','like',"%{$request->search}%");
         }
         $per_page = config('constant.PER_PAGE_LIMIT');
         if( $request->has('per_page') && !empty($request->per_page)){

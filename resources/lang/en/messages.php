@@ -669,6 +669,6 @@
         'filter_by_sub_category' => 'Filter by Sub-Category',
         'post_job' => 'Post Job',
         'plan_image' => 'Plan Image',
-        
+        'filter_by_text' => 'Text'
     )
     ?>

@@ -28,12 +28,12 @@
                     <img :src="serviceProviderImg" alt="image" class="img-fluid avatar avatar-35 avatar-rounded"/>
                     <span class="ms-2">{{ serviceProvider }}</span>
                     <!-- <span class="ms-2">planImg: {{ isVarifiedImg }}</span> -->
-                    <!-- <div class="ms-2" v-if="isVarifiedImg == 1">
+                    <div class="ms-2" v-if="isVarifiedImg == 1">
                         <img :src="getImageUrl()" alt="Image" class="img-fluid avatar avatar-35 avatar-rounded" />
-                    </div>  -->
-                    <!-- <div class="ms-2">
+                    </div> 
+                    <div class="ms-2">
                         <img :src="getPlanImageUrl(planImg)" alt="Image" class="img-fluid avatar avatar-35 avatar-rounded" />
-                    </div>                 -->
+                    </div>                
                 </div>
                 <div class="location-info">
                     <span class="ms-2">{{ displayLocation }}</span>
